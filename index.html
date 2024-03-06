@@ -33,6 +33,8 @@
 
 <body>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
@@ -108,7 +110,7 @@
                       <div class="about-info">
                         <p><span class="title-s">Name: </span> <span>Morgan Freeman</span></p>
                         <p><span class="title-s">Profile: </span> <span>full stack developer</span></p>
-                        <p><span class="title-s">Email: </span> <span>contact@example.com</span></p>
+                        <p><span class="title-s">Email: </span> <span>shamsjubair.sj@gmail.com</span></p>
                         <p><span class="title-s">Phone: </span> <span>(617) 557-0089</span></p>
                       </div>
                     </div>
@@ -676,26 +678,26 @@
                       </h5>
                     </div>
                     <div>
-                      <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    
                         <div class="row">
                           <div class="col-md-12 mb-3">
                             <div class="form-group">
-                              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                              <input type="text" class="form-control" id="name" placeholder="Your Name" required>
                             </div>
                           </div>
                           <div class="col-md-12 mb-3">
                             <div class="form-group">
-                              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                              <input type="email" class="form-control" id="email" placeholder="Your Email" required>
                             </div>
                           </div>
                           <div class="col-md-12 mb-3">
                             <div class="form-group">
-                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                              <input type="text" class="form-control" id="subject" placeholder="Subject" required>
                             </div>
                           </div>
                           <div class="col-md-12">
                             <div class="form-group">
-                              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                              <textarea class="form-control" id="message" rows="5" placeholder="Message" required></textarea>
                             </div>
                           </div>
                           <div class="col-md-12 text-center my-3">
@@ -704,10 +706,10 @@
                             <div class="sent-message">Your message has been sent. Thank you!</div>
                           </div>
                           <div class="col-md-12 text-center">
-                            <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
+                            <button type="submit" class="button button-a button-big button-rouded" id="sendMessageButton">Send Message</button>
                           </div>
                         </div>
-                      </form>
+                     
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -726,7 +728,7 @@
                       <ul class="list-ico">
                         <li><span class="bi bi-geo-alt"></span> 329 WASHINGTON ST BOSTON, MA 02108</li>
                         <li><span class="bi bi-phone"></span> (617) 557-0089</li>
-                        <li><span class="bi bi-envelope"></span> contact@example.com</li>
+                        <li><span class="bi bi-envelope"></span> shamsjubair.sj@gmail.com</li>
                       </ul>
                     </div>
                     <div class="socials">
@@ -783,6 +785,40 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+
+    document.getElementById("sendMessageButton").addEventListener("click",function(){
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var subject = document.getElementById("subject").value;
+      var message = document.getElementById("message").value;
+
+      const messageBody = {
+        name: name,
+        email: email,
+        subject: subject,
+        message: message
+      }
+
+      emailjs.init("vVFJiM1RF1d4Liq0b");
+
+
+      var serviceID = "service_d0vdwoy";
+      var templateID = "template_hgb3zuo";
+
+      emailjs.send(serviceID,templateID,messageBody)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+   
+
+     
+
+    })
+
+
+
+  </script>
 
 </body>
 
